@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService{
 			if (rs.next()) {
 				isValidUser = true;
 			}
+			stmnt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService{
 			if(result > 0) {
 				userCreated = true;
 			}
+			stmnt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,6 +63,7 @@ public class UserServiceImpl implements UserService{
 			if(rs.next()) {
 				isUserLoggedIn = rs.getBoolean("flag");
 			}
+			stmnt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,6 +85,7 @@ public class UserServiceImpl implements UserService{
 			if(result > 0) {
 				isFlagUpdated = true;
 			}
+			stmnt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
