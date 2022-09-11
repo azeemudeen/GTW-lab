@@ -14,7 +14,7 @@ public class SessionListener implements HttpSessionListener {
     public SessionListener() { }
 
     public void sessionCreated(HttpSessionEvent se)  { 
-    	System.out.println("Session created");
+    	System.out.println("...Session created...");
     }
 
     public void sessionDestroyed(HttpSessionEvent se)  {
@@ -22,10 +22,10 @@ public class SessionListener implements HttpSessionListener {
     	String uname = (String) session.getAttribute("uname");
     	if(uname != null) {
     		UserService userService = new UserServiceImpl();
-    		userService.updateFlag(uname, 0);
-    		System.out.println("User Logged out");
+    		userService.updateLoginStatus(uname, false);
+    		System.out.println("User:"+uname+" Logged out");
     	}
-    	System.out.println("Session destroyed");
+    	System.out.println("...Session destroyed...");
     }
 	
 }

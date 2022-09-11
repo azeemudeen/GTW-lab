@@ -10,6 +10,13 @@
 <body>
 	<div class="container">
 	  	<h1> Welcome <% out.print(request.getParameter("uname")); %> </h1>
+	  	
+	  	<form action="shop.demo" method="post">
+   		<input type="hidden" name="formid" value="shopping" />
+   		<input type="hidden" name="shopid" value="shop1" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Go Shopping</button>
+        </form>
+        <br>
 	    <form action="logout.demo" method="post">
    		<input type="hidden" name="formid" value="logout" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Logout</button>

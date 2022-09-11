@@ -20,10 +20,10 @@ public class RegisterAction implements Action {
 		boolean userRegistered = userService.registerUser(newUser);
 		
 		if(userRegistered) {
-			System.out.println("user.register.success");
+			System.out.println("User:"+uname+" Registered");
 			return "user.register.success";			
 		}
-		System.out.println("user.register.failed");
+		System.out.println("User:"+uname+" Registerion failed");
 		return "user.register.failed";
 	}
 

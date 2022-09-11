@@ -6,36 +6,34 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static Connection con;
+	private static DBConnection DBCon;
+	private Connection con;
+	private final String username = "root";
+	private final String password = "root";
+	private final String jdbcUrl = "jdbc:mysql://localhost/servletdb";
 	
 	private DBConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+			this.con = DriverManager.getConnection(jdbcUrl,username,password);
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	synchronized public static Connection getConnection() {
+	synchronized public static DBConnection getInstance() {
 		try {
-			if(con == null) {
-				String username = "root";
-				String password = "root";
-				String jdbcUrl = "jdbc:mysql://localhost/servletdb";
-				con = DriverManager.getConnection(jdbcUrl,username,password);				
+			if(DBCon == null || DBCon.getConnection().isClosed()) {
+				DBCon = new DBConnection();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-
-	synchronized public static void closeConnection(){
-		try {
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return DBCon;
+	}
+	
+	public Connection getConnection() {
+		return con;
 	}
 
 }

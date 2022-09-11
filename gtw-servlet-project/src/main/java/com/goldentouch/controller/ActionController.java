@@ -1,6 +1,8 @@
 package com.goldentouch.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +30,10 @@ public class ActionController extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		DBConnection.closeConnection();
+		try {
+			DBConnection.getInstance().getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
 	}
 }

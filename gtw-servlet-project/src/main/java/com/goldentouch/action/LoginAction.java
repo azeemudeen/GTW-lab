@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.goldentouch.dto.User;
 import com.goldentouch.service.UserService;
 import com.goldentouch.service.UserServiceImpl;
 
@@ -17,22 +16,21 @@ public class LoginAction implements Action {
 		String upass = request.getParameter("upass");
 		
 		UserService userService = new UserServiceImpl();
-		User user = new User(uname, upass);
 		
-		if(userService.checkUserLogin(user)){
-			if(!userService.checkFlag(uname)) {
+		if(userService.checkUserLogin(uname, upass)){
+			if(!userService.checkLoginStatus(uname)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", uname);
 				session.setMaxInactiveInterval(60);
-				userService.updateFlag(uname, 1);
+				userService.updateLoginStatus(uname, true);
 				
-				System.out.println("user.login.success");
+				System.out.println("User:"+uname+" LoggedIn");
 				return "user.login.success";				
 			} else {
 				return "user.login.session.error";
 			}
 		}
-		System.out.println("user.login.failed");
+		System.out.println("User:"+uname+" Login failed");
 		return "user.login.failed";
 	}
 
