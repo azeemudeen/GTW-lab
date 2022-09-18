@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
   		<h1>Fruit Shop</h1>
-	    <form action="shop.demo" method="post">
+	    <form action= <%= response.encodeURL("shop.demo") %> method="post">
     	    <input type="hidden" name="formid" value="shopping" />
     	    <input type="hidden" name="shopid" value="shop2" />
     	    

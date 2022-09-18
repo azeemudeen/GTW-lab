@@ -19,7 +19,7 @@
 			out.println("<h2>"+name+":"+value+"</h2>");
 		}
 		%>
-	    <form action="shop1.demo" method="post">
+	    <form action= <%= response.encodeURL("shop1.demo") %> method="post">
     	    <input type="hidden" name="formid" value="shopping" />
     	    <input type="hidden" name="shopid" value="shop1" />
         	<button type="submit" class="btn btn-primary btn-block btn-large">Back to Shopping</button>
