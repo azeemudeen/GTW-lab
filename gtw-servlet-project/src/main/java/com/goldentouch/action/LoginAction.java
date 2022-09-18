@@ -1,5 +1,7 @@
 package com.goldentouch.action;
 
+import java.net.HttpURLConnection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +33,7 @@ public class LoginAction implements Action {
 			}
 		}
 		System.out.println("User:"+uname+" Login failed");
+		response.setStatus(HttpURLConnection.HTTP_UNAUTHORIZED);
 		return "user.login.failed";
 	}
 

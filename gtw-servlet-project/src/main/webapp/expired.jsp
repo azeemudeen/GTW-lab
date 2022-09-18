@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
   		<h1>Session Expired</h1>
-	    <form action="login.html" method="post">
+	    <form action="login.jsp" method="post">
         	<button type="submit" class="btn btn-primary btn-block btn-large">Back to Login</button>
     	</form>
 	</div>
