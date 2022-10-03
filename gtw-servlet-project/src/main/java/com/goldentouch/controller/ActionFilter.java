@@ -20,7 +20,7 @@ public class ActionFilter implements Filter {
 		
 		if(httpReq.getSession().isNew()) {
 			String formid = httpReq.getParameter("formid");
-			if(formid != null && formid.equals("login")) {
+			if(formid != null && formid.equals("login") || formid.equals("register")) {
 				chain.doFilter(request, response);							
 			} else {
 				httpRes.sendRedirect("expired.jsp");	

@@ -29,7 +29,34 @@ public class ProductDAOImpl implements ProductDAO{
 			while(rs.next()) {
 				String productName = rs.getString("name");
 				int productPrice = rs.getInt("price");
-				productList.add(new Product(productName, productPrice));
+				String image_uri = rs.getString("image_uri");
+				String code = rs.getString("code");
+				int category_id = rs.getInt("category_id");
+				productList.add(new Product(productName, productPrice, image_uri, code, category_id));
+			}
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return productList;
+	}
+
+	@Override
+	public List<Product> findByCategory(int categoryId) {
+		List<Product> productList = new ArrayList<>();
+		try {
+			Connection con = DBCon.getConnection();
+			String sql = "SELECT * FROM product WHERE category_id=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, categoryId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String productName = rs.getString("name");
+				int productPrice = rs.getInt("price");
+				String image_uri = rs.getString("image_uri");
+				String code = rs.getString("code");
+				int category_id = rs.getInt("category_id");
+				productList.add(new Product(productName, productPrice, image_uri, code, category_id));
 			}
 			ps.close();
 		} catch (SQLException e) {

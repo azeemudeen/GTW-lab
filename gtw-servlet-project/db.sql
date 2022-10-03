@@ -12,5 +12,16 @@ CREATE TABLE `product` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `price` varchar(45) DEFAULT NULL,
+  `image_uri` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+);
+
+CREATE TABLE `product_category` (
+  `id` int NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+INSERT INTO `servletdb`.`product_category` (`id`, `name`) VALUES ('1', 'fruit');
+INSERT INTO `servletdb`.`product_category` (`id`, `name`) VALUES ('2', 'vegetable');
+

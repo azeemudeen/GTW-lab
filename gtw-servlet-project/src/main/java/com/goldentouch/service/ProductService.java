@@ -6,4 +6,6 @@ import com.goldentouch.dto.Product;
 
 public interface ProductService {
 	List<Product> getAllProducts();
+	List<Product> getFruitShopProducts();
+	List<Product> getVegShopProducts();
 }

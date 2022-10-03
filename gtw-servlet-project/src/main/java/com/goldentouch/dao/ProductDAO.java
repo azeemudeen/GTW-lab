@@ -6,4 +6,6 @@ import com.goldentouch.dto.Product;
 
 public interface ProductDAO {
 	List<Product> getAll();
+
+	List<Product> findByCategory(int categoryId);
 }
