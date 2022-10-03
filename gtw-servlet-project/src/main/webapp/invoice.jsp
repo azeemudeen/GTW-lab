@@ -4,6 +4,7 @@
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,17 +15,9 @@
 <body>
 	<div class="container">
   		<h1>Invoice</h1>
-  		<%
-			Map<String,String> shoppingList = (Map<String,String>) session.getAttribute("shoppingList");
-			Iterator<Map.Entry<String,String>> iter = shoppingList.entrySet().iterator();
-			while(iter.hasNext()){
-				Map.Entry<String,String> entry = (Map.Entry<String,String>) iter.next();
-				String name = entry.getKey();
-				String value = entry.getValue();
-				out.println("<h2>"+name+":"+value+"</h2>");
-			}
-			shoppingList.entrySet().stream().map(entry -> entry.getKey()).forEach(out::print);
-		%>
+	    <c:forEach var="shopEntry" items="${sessionScope.shoppingList}">
+         	<h2>${shopEntry.getKey()} : ${shopEntry.getValue()}</h2>
+        </c:forEach>
 	    <form action= <%= response.encodeURL("shop1.demo") %> method="post">
     	    <input type="hidden" name="formid" value="shopping" />
     	    <input type="hidden" name="shopid" value="shop1" />
@@ -32,7 +25,7 @@
     	</form>
     	<br>
     	<form action= <%= response.encodeURL("logout.demo") %> method="post">
-			<input type="hidden" name="formid" value="logout" />
+	   		<input type="hidden" name="formid" value="logout" />
 	        <button type="submit" class="btn btn-primary btn-block btn-large">Logout</button>
         </form>
 	</div>

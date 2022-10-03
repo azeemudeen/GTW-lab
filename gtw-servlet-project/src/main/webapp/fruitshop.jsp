@@ -4,6 +4,7 @@
 <%@page import="com.goldentouch.service.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,26 +23,22 @@
 	    	<input type="hidden" name="shopid" value="shop2" />
 	        <div class="row">
 	            <div class="d-flex align-content-center flex-wrap">
-	            <%
-	            ProductService productService = new ProductServiceImpl();
-	           	List<Product> fruitProducts = productService.getFruitShopProducts();
-	           	for(Product fruit : fruitProducts){
-	           		out.print("<div class=\"card p-3 col-md-3 mt-2\">");
-	           		out.print("<h4 class=\"main-heading mt-2\">"+fruit.getName()+"</h4>");
-	           		out.print("<div class=\"mt-3\">");
-	           		out.print("<h5>Price : $"+fruit.getPrice()+"</h5>");
-	           		out.print("</div>");
-	           		out.print("<div class=\"image mt-2\">");
-	           		out.print("<img src=\"res/img/"+fruit.getImageUri()+"\" width=\"150\">");
-	           		out.print("</div>");
-	           		out.print("<div class=\"btn-group-toggle\">");
-	           		out.print("<label id=\"change\" class=\"btn btn-primary btn-block mt-4\">");
-	           		out.print("<input type=\"checkbox\" name=\""+fruit.getCode()+"\" value=\""+fruit.getName()+"\" autocomplete=\"off\"");
-	           		out.print("<i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i> Add to Cart</label>");
-	           		out.print("</div>");
-	           		out.print("</div>");
-	           	}
-	            %>
+	            <c:forEach var="fruit" items="${sessionScope.fruitProducts}">
+					<div class="card p-3 col-md-3 mt-2">
+					<h4 class="main-heading mt-2">${fruit.getName()}</h4>
+		 	        <div class="mt-3">
+	 	            <h5>Price : $ ${fruit.getPrice()}</h5>
+	 	            </div>
+	 	            <div class="image mt-2">
+	 	            <img src="res/img/${fruit.getImageUri()}" width="150">
+	 	            </div>
+	 	            <div class="btn-group-toggle\">
+	 	            <label id="change" class="btn btn-primary btn-block mt-4">
+	 	            <input type="checkbox" name="${fruit.getCode()}" value="${fruit.getName()}" autocomplete="off">
+	 	            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</label>
+	 	            </div>
+	 	            </div>
+	            </c:forEach>
 	        <div class = "pull-right" >
 	            <button type="submit" class="btn btn-success mt-4 mb-3 mr-2 col-sm-2" style ="position:fixed; bottom:0; right:0;">Next Store</button>
 	        </div>
